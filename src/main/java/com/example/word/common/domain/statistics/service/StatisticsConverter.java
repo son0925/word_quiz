@@ -22,8 +22,7 @@ public class StatisticsConverter {
                 .correctAnswerCount(entity.getCorrectAnswerCount())
                 .totalQuizCount(entity.getTotalQuizCount())
                 .noQuizCount(entity.getNoQuizCount())
-                .user(entity.getUser())
-                .word(entity.getWord())
+                .word(entity.getWord().getWord())
                 .build();
     }
 }

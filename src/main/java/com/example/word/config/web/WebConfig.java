@@ -30,7 +30,6 @@ public class WebConfig implements WebMvcConfigurer {
             "/error"
     );
 
-
     private List<String> SWAGGER = List.of(
             "/swagger-ui.html",
             "/swagger-ui/**",
@@ -42,8 +41,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(authorizationInterceptor)
                 .excludePathPatterns(OPEN_API)
                 .excludePathPatterns(DEFAULT_EXCLUDE)
-                .excludePathPatterns(SWAGGER)
-        ;
+                .excludePathPatterns(SWAGGER);
     }
 
     @Override
@@ -51,24 +49,23 @@ public class WebConfig implements WebMvcConfigurer {
         resolvers.add(userSessionResolver);
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://my-word-book.kro.kr:3000")  // 허용할 도메인 지정
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
-            }
-        };
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins(
+                        "http://my-word-book.kro.kr:3000",
+                        "http://114.199.209.138:3000",
+                        "http://localhost:3000"
+                )
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/public/images/**")
                 .addResourceLocations("file:///C:/project/word_guiz/src/main/resources/public/images/")
-                .setCachePeriod(0); // 캐시 비활성화
+                .setCachePeriod(0);
     }
 }

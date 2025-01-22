@@ -84,6 +84,7 @@ public class StatisticsService {
                 .filter(it -> it.getStatus().equals(StatisticsStatus.NO_ANSWER))
                 .collect(Collectors.toList());
 
+
         // size 채웠다면 바로 return 하기
         if (wordQuizList.size() >= size) {
             return wordQuizList.subList(0, size);
@@ -102,7 +103,7 @@ public class StatisticsService {
 
         // 퀴즈를 5번 이하로 했는 단어
         statisticsList.stream()
-                .filter(it -> it.getTotalQuizCount() <= 5)
+                .filter(it -> it.getTotalQuizCount() <= 3)
                 .filter(it -> !wordQuizList.contains(it))
                 .forEach(wordQuizList::add);
 
@@ -125,6 +126,7 @@ public class StatisticsService {
 
         // 퀴즈를 풀었지만 틀린 단어들 (정답률에 따라 정렬)
         var sortList = new ArrayList<>(statisticsList.stream()
+                .filter(it -> it.getNoQuizCount() <= 10)
                 .filter(it -> !wordQuizList.contains(it))
                 .toList());
 

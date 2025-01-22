@@ -5,10 +5,7 @@ import com.example.word.common.domain.user.model.UserEntity;
 import com.example.word.common.domain.word.model.WordEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity

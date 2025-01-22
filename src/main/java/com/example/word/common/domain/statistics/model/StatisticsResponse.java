@@ -26,8 +26,6 @@ public class StatisticsResponse {
 
     private Long totalQuizCount;
 
-    private UserEntity user;
-
-    private WordEntity word;
+    private String word;
 
 }

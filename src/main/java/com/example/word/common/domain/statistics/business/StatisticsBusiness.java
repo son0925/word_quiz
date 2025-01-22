@@ -9,10 +9,12 @@ import com.example.word.common.domain.user.model.User;
 import com.example.word.common.domain.user.model.UserEntity;
 import com.example.word.common.domain.word.model.WordEntity;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Business
 @RequiredArgsConstructor
 public class StatisticsBusiness {
@@ -54,9 +56,13 @@ public class StatisticsBusiness {
     public List<StatisticsResponse> getWordQuizList(User user, int size) {
         var userId = userBusiness.findByIdWithThrow(user).getUserId();
 
-        return statisticsService.getWordQuizList(userId, size).stream()
+        var statisticsResponseList =  statisticsService.getWordQuizList(userId, size).stream()
                 .map(statisticsConverter::toResponse)
                 .toList();
+
+        log.info(statisticsResponseList.toString());
+
+        return statisticsResponseList;
     }
 
     public void resultUpdate(User user, List<StatisticsUpdateRequest> req) {
