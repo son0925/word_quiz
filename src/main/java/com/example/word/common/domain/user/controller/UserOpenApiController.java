@@ -17,6 +17,11 @@ public class UserOpenApiController {
 
     private final UserBusiness userBusiness;
 
+    @GetMapping("")
+    public String test() {
+        return "test";
+    }
+
     // 로그인
     @PostMapping("/login")
     public Api<UserResponse> login(

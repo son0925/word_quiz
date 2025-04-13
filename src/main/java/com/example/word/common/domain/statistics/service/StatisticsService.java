@@ -111,7 +111,7 @@ public class StatisticsService {
             return wordQuizList.subList(0, size);
         }
 
-        int count = Math.max(statisticsList.size() / 10, 5);
+        int count = 5;
 
         // 5번 이상 퀴즈를 하지 않은 단어
         statisticsList.stream()
